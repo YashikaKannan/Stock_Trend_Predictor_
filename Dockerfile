@@ -15,8 +15,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     && rm -rf /var/lib/apt/lists/*
 
+
 # Copy backend requirements
 COPY backend/requirements.txt .
+COPY backend/constraints.txt .
+
 RUN pip install --no-cache-dir -c constraints.txt -r requirements.txt
 
 
