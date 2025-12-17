@@ -7,7 +7,7 @@ COPY frontend/ ./
 RUN npm run build
 
 # Backend stage
-FROM python:3.11-slim
+FROM python:3.10-slim
 WORKDIR /app/backend
 
 # Install system dependencies
