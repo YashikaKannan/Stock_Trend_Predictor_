@@ -1,8 +1,8 @@
 fastapi
 uvicorn
-pandas
+pandas==1.5.3
 numpy==1.23.5
 matplotlib
-yfinance
-scikit-learn
+yfinance==0.2.32
+scikit-learn==1.3.2
 tensorflow==2.12.0
