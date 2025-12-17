@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#00BFFF" />
+    <meta
+      name="description"
+      content="Stock Price Trend Predictor - LSTM Deep Learning Forecasting Dashboard"
+    />
+    <title>Stock Trend Predictor</title>
+    <link rel="icon" type="image/png" href="%PUBLIC_URL%/Favicon.png" />
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('stp_theme') || 'light';
+          document.documentElement.classList.add(t + '-mode');
+        } catch (e) {
+          // ignore if localStorage is not available
+          document.documentElement.classList.add('light-mode');
+        }
+      })();
+    </script>
+
+  </head>
+  <body>
+    <!-- <noscript>You need to enable JavaScript to run this app.</noscript> -->
+    <div id="root"></div>
+  </body>
+</html>

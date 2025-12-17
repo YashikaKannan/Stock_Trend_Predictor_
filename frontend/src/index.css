@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Slightly increase the root font-size so rem-based text is a bit larger */
+html {
+  font-size: 112.5%; /* 16px -> 18px (approx) */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+  font-size: 1rem; /* keep body at 1rem; rems are now slightly larger due to html rule */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg-gradient);
+  color: var(--text-color);
+}
+
+/* Theme variables */
+:root {
+  --bg-gradient: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  --text-color: #111111; /* dark text for light theme (improved contrast) */
+  --panel-bg: rgba(255,255,255,0.95);
+  --panel-bg-contrast: rgba(255,255,255,1);
+  --muted: #333333; /* accessible muted color */
+  --accent-cyan: #06b6d4;
+  --accent-blue: #2563eb;
+  --chart-bg: #ffffff;
+  --panel-border-color: rgba(15,23,42,0.08);
+}
+
+.dark-mode {
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  --text-color: #e2e8f0;
+  --panel-bg: rgba(15,23,42,0.6);
+  --panel-bg-contrast: rgba(15,23,42,0.8);
+  --muted: #94a3b8;
+  --accent-cyan: #06b6d4;
+  --accent-blue: #2563eb;
+  --chart-bg: #0f172a;
+  --panel-border-color: rgba(148,163,184,0.06);
+}
+
+.light-mode {
+  --bg-gradient: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  --text-color: #111111;
+  --panel-bg: rgba(255,255,255,0.95);
+  --panel-bg-contrast: rgba(255,255,255,1);
+  --muted: #333333;
+  --accent-cyan: #06b6d4;
+  --accent-blue: #2563eb;
+  --chart-bg: #ffffff;
+  --panel-border-color: rgba(15,23,42,0.08);
+}
+
+/* Common panel helper class to pick up theme variables */
+.panel {
+  background: var(--panel-bg);
+  border-radius: 0.5rem;
+  border: 1px solid var(--panel-border-color);
+  transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease;
+  box-shadow: 0 6px 14px rgba(2,6,23,0.06);
+}
+
+/* Slightly stronger contrast for a specific panel (e.g., table) */
+.panel-contrast {
+  background: var(--panel-bg-contrast);
+}
+
+/* Reduce the impact of heavy Tailwind shadows for elements with panel class */
+.panel.shadow-lg, .panel.shadow-2xl {
+  box-shadow: 0 4px 10px rgba(2,6,23,0.04) !important;
+}
+
+/* Table header and row styling inside panels */
+.panel table thead th {
+  background: transparent;
+  text-align: left;
+}
+.panel table thead th, .panel table tbody td {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+}
+.panel table tbody tr {
+  border-top: 1px solid var(--panel-border-color);
+}
+
+.panel table tbody tr:first-child { border-top: none; }
+
+/* Global text classes which reference theme variables for easy use */
+.text-primary { color: var(--text-color); }
+.text-muted { color: var(--muted); }
+.btn-ghost { background: var(--panel-bg); color: var(--text-color); }
+
+/* Input style that respects theme */
+.input-panel {
+  background: var(--panel-bg);
+  color: var(--text-color);
+  border: 1px solid var(--panel-border-color);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+}
+
+.input-panel::placeholder { color: var(--muted); opacity: 0.8; }
+
+/* Row hover style inside panels, theme-aware */
+/* Table row hover styles removed for the prediction table (component was removed) */
+
+/* Smooth transition for root elements */
+html, body, #root { transition: background 300ms ease, color 300ms ease; }
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
