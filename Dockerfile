@@ -17,7 +17,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Copy backend requirements
 COPY backend/requirements.txt .
+RUN pip install --no-cache-dir numpy==1.23.5
 RUN pip install --no-cache-dir -r requirements.txt
+
 
 # Copy backend code
 COPY backend/ .
