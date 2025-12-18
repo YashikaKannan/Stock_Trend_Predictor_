@@ -17,37 +17,6 @@ A full-stack web application for stock price prediction using LSTM deep learning
 
 ---
 
-## 📦 Project Structure
-
-```
-stock-trend-predictor/
-├── backend/
-│   ├── main.py                 # FastAPI application with endpoints
-│   ├── model_utils.py          # LSTM model building & data preparation
-│   ├── indicators.py           # MA & RSI calculations
-│   ├── requirements.txt        # Python dependencies
-│   └── Dockerfile              # Backend container config
-├── frontend/
-│   ├── src/
-│   │   ├── components/         # React components
-│   │   │   ├── Header.jsx
-│   │   │   ├── Sidebar.jsx
-│   │   │   ├── ComparisonChart.jsx
-│   │   │   ├── PredictionChart.jsx
-│   │   │   └── StatsCard.jsx
-│   │   ├── App.js              # Main React app
-│   │   ├── api.js              # Axios API client
-│   │   └── index.css           # Tailwind styles
-│   ├── public/
-│   ├── package.json
-│   ├── tailwind.config.js
-│   └── Dockerfile              # Frontend container config
-├── Dockerfile                  # Multi-stage build
-├── docker-compose.yml          # Orchestrate frontend & backend
-└── README.md
-```
-
----
 
 ## 🚀 Quick Start
 
