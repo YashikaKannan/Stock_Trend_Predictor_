@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, FileResponse
 from pydantic import BaseModel
 from typing import List
 import yfinance as yf
@@ -10,6 +10,9 @@ from datetime import datetime, timedelta
 from sklearn.metrics import mean_squared_error
 import logging
 import io
+from fastapi.staticfiles import StaticFiles
+import os
+
 
 from model_utils import prepare_data, build_lstm
 from indicators import moving_average, calculate_rsi
@@ -130,18 +133,10 @@ def calculate_stats(data):
 
 
 # ============== API Endpoints ==============
-
 @app.get("/")
-async def root():
-    """Health check endpoint"""
-    return {
-        "message": "Stock Trend Predictor API is running",
-        "endpoints": {
-            "compare": "/compare?symbols=RELIANCE.NS,AAPL&start=2020-01-01&end=2025-11-13",
-            "predict": "/predict?symbol=RELIANCE.NS&start=2020-01-01&end=2025-11-13&days=7",
-            "stats": "/stats?symbol=RELIANCE.NS&start=2020-01-01&end=2025-11-13"
-        }
-    }
+async def serve_ui():
+    return FileResponse("frontend/build/index.html")
+
 
 
 @app.get("/compare", response_model=ComparisonResponse)
