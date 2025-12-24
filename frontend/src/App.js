@@ -9,6 +9,7 @@ import StatsCard from './components/StatsCard';
 import DownloadCSVButton from './components/DownloadCSVButton';
 import LandingPage from './components/LandingPage';
 import { stockAPI } from './api';
+import formatINR from './utils/currency';
 
 function App() {
   const [showDashboard, setShowDashboard] = useState(false);
@@ -99,7 +100,7 @@ function App() {
           )}
 
           {symbols.map(symbol => (
-            <div key={symbol} className="panel backdrop-blur p-6">
+            <div key={symbol} className="panel backdrop-blur p-4">
               <h2 className="text-xl font-bold text-primary mb-4">📈 {symbol}</h2>
               
               <div className="flex gap-3 mb-4">
@@ -125,16 +126,17 @@ function App() {
                   <div className="mb-6">
                     <PredictionChart data={predictionData[symbol]} />
                   </div>
+                  <div className = "self-start">
                   <PredictionTable data={predictionData[symbol]} />
                   {/* Prediction Table removed - revert to download only behavior */}
-                  
+                  </div>
                   {statsData[symbol] && (
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                      <StatsCard label="Open Price" value={`$${statsData[symbol].open_price.toFixed(2)}`} />
-                      <StatsCard label="Prev Close" value={`$${statsData[symbol].prev_close.toFixed(2)}`} />
-                      <StatsCard label="52W High" value={`$${statsData[symbol].high_52w.toFixed(2)}`} />
-                      <StatsCard label="52W Low" value={`$${statsData[symbol].low_52w.toFixed(2)}`} />
-                      <StatsCard label="MA (20)" value={`$${statsData[symbol].ma_20?.toFixed(2) || 'N/A'}`} />
+                      <StatsCard label="Open Price" value={formatINR(statsData[symbol].open_price)} />
+                      <StatsCard label="Prev Close" value={formatINR(statsData[symbol].prev_close)} />
+                      <StatsCard label="52W High" value={formatINR(statsData[symbol].high_52w)} />
+                      <StatsCard label="52W Low" value={formatINR(statsData[symbol].low_52w)} />
+                      <StatsCard label="MA (20)" value={statsData[symbol].ma_20 ? formatINR(statsData[symbol].ma_20) : 'N/A'} />
                       <StatsCard label="RSI (14)" value={statsData[symbol].rsi_14?.toFixed(2) || 'N/A'} />
                       <StatsCard label="Volume" value={`${(statsData[symbol].volume / 1e6).toFixed(1)}M`} />
                       <StatsCard label="RMSE" value={predictionData[symbol].rmse.toFixed(2)} />

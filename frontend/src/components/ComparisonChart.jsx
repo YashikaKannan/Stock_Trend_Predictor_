@@ -10,6 +10,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
+import { formatINR } from '../utils/currency';
 
 export default function ComparisonChart({ data }) {
   const { theme } = useTheme();
@@ -42,8 +43,9 @@ export default function ComparisonChart({ data }) {
           tick={{ fill: isDark ? '#cbd5e1' : '#334155', fontSize: 12 }}
           interval={Math.floor(chartData.length / 6)}
         />
-        <YAxis tick={{ fill: isDark ? '#cbd5e1' : '#334155', fontSize: 12 }} />
+        <YAxis tick={{ fill: isDark ? '#cbd5e1' : '#334155', fontSize: 12 }} tickFormatter={(v) => formatINR(v)} />
         <Tooltip
+          formatter={(value) => formatINR(value)}
           contentStyle={{
             backgroundColor: isDark ? '#0f172a' : '#ffffff',
             border: `1px solid ${isDark ? '#0891b2' : '#2563eb'}`,

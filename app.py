@@ -192,13 +192,25 @@ for symbol in symbols:
             return arr[0]
         return v
 
+    def format_inr_number(val):
+        # Format a number using Indian digit grouping (e.g., 2,70,840.50)
+        s = f"{val:.2f}"
+        int_part, dec = s.split('.')
+        # Reverse the integer part for grouping
+        rev = int_part[::-1]
+        groups = []
+        groups.append(rev[:3])
+        for i in range(3, len(rev), 2):
+            groups.append(rev[i:i+2])
+        return '₹' + ','.join(groups)[::-1] + '.' + dec
+
     def fmt_money(x):
         x = _to_scalar(x)
         try:
             val = float(x)
             if np.isnan(val):
                 return "N/A"
-            return f"${val:,.2f}"
+            return format_inr_number(val)
         except Exception:
             return "N/A"
 

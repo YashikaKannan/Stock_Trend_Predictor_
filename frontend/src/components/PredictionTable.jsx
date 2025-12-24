@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatINR } from '../utils/currency';
 
 export default function PredictionTable({ data }) {
   // If there's no data, show an empty state message
@@ -20,28 +21,73 @@ export default function PredictionTable({ data }) {
   }
 
   return (
-    <div className="mt-4 panel panel-contrast overflow-auto p-3" aria-live="polite">
-      <div className="flex items-center justify-between mb-2">
-        <h4 className="text-sm font-semibold text-primary">Predicted Prices</h4>
-      </div>
-      <div className="w-full overflow-x-auto">
-        <table className="w-full text-sm md:text-base table-fixed border-collapse" role="table" aria-label="Predicted prices table">
-          <thead>
-            <tr>
-              <th scope="col" className="sticky top-0 text-left px-3 py-1 text-primary font-bold" style={{ borderBottom: '1px solid var(--panel-border-color)', background: 'var(--panel-bg-contrast)' }}>Date</th>
-              <th scope="col" className="sticky top-0 text-right px-5 py-5 text-primary font-bold" style={{ borderBottom: '1px solid var(--panel-border-color)', background: 'var(--panel-bg-contrast)' }}>Predicted Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((r, idx) => (
-              <tr key={idx} className="odd:bg-transparent even:bg-transparent" style={{ borderTop: idx > 0 ? '1px solid var(--panel-border-color)' : 'none' }}>
-                <td className="px-3 py-1 text-primary">{r.date}</td>
-                <td className="px-3 py-1 text-right text-primary">${r.price.toFixed(2)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <div
+  className="mt-4 panel panel-contrast overflow-auto p-3 text-left"
+  aria-live="polite"
+>
+  <div className="w-full overflow-x-auto">
+    <table
+  className="w-full text-sm md:text-base table-fixed border-collapse"
+  role="table"
+  aria-label="Predicted prices table"
+>
+  {/* 🔥 THIS IS THE KEY FIX */}
+  <colgroup>
+    <col className="w-1/2" />
+    <col className="w-1/2" />
+  </colgroup>
+
+  <thead>
+    <tr>
+      <th
+        scope="col"
+        className="sticky top-0 text-left px-3 py-1.5 text-primary font-bold"
+        style={{
+          borderBottom: '1px solid var(--panel-border-color)',
+          background: 'var(--panel-bg-contrast)',
+        }}
+      >
+        Date
+      </th>
+
+      <th
+        scope="col"
+        className="sticky top-0 px-3 py-2 text-primary font-bold whitespace-nowrap"
+        style={{
+          borderBottom: '1px solid var(--panel-border-color)',
+          background: 'var(--panel-bg-contrast)',
+        }}
+      >
+        Predicted Price
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {rows.map((r, idx) => (
+      <tr
+        key={idx}
+        className="hover:bg-white/5 transition-colors"
+        style={{
+          borderTop:
+            idx > 0
+              ? '1px solid var(--panel-border-color)'
+              : 'none',
+        }}
+      >
+        <td className="px-3 py-1.5 text-left text-primary">
+          {r.date}
+        </td>
+
+        <td className="px-3 py-2 text-primary">
+          {formatINR(r.price)}
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+  </div>
+</div>
   );
 }

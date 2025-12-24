@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TrendingUp, Zap, Eye, ArrowRight, BarChart3 } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import HowItWorks from './HowItWorks';
+import LearnMore from './LearnMore';
 
 export default function LandingPage({ onExplore }) {
+  const [learnOpen, setLearnOpen] = useState(false);
+
   return (
     <div style={{ background: 'var(--bg-gradient)', color: 'var(--text-color)' }} className="min-h-screen overflow-hidden">
       {/* Navigation */}
@@ -68,7 +72,7 @@ export default function LandingPage({ onExplore }) {
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </button>
               <button
-                onClick={onExplore}
+                onClick={() => setLearnOpen(true)}
                 className="px-8 py-4 border border-cyan-500/50 hover:border-cyan-400 text-cyan-300 hover:text-cyan-200 font-semibold rounded-lg transition-all duration-300 backdrop-blur bg-cyan-500/5 hover:bg-cyan-500/10"
               >
                 Learn More
@@ -77,6 +81,14 @@ export default function LandingPage({ onExplore }) {
           </div>
         </div>
       </section>
+
+      {/* Learn More Modal (Hero) */}
+      {learnOpen && (
+        <LearnMore
+          onClose={() => setLearnOpen(false)}
+          onTry={() => { setLearnOpen(false); onExplore(); }}
+        />
+      )}
 
       {/* Benefits Section */}
       <section className="py-20 px-4 md:px-6 backdrop-blur" style={{ background: 'transparent' }}>
@@ -137,39 +149,8 @@ export default function LandingPage({ onExplore }) {
         </div>
       </section>
 
-      {/* Preview Section */}
-      <section className="py-20 px-4 md:px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary">
-              Your Personal AI Trend Prediction Tool
-            </h2>
-            <p className="text-muted text-lg">
-              A clean, intuitive dashboard designed for modern investors
-            </p>
-          </div>
-
-          {/* Dashboard Preview */}
-          <div className="relative rounded-xl overflow-hidden panel backdrop-blur shadow-2xl">
-            {/* Blur effect overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900/80 pointer-events-none" />
-            
-            {/* Mock Dashboard */}
-            <div className="relative p-6 md:p-8 min-h-96" style={{background: 'var(--chart-bg)'}}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                <div className="h-20 panel rounded-lg animate-pulse" />
-                <div className="h-20 panel rounded-lg animate-pulse" />
-              </div>
-              <div className="h-48 panel rounded-lg animate-pulse" />
-              <div className="grid grid-cols-4 gap-3 mt-6">
-                {[...Array(4)].map((_, i) => (
-                  <div key={i} className="h-16 panel rounded-lg animate-pulse" />
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* How It Works Section */}
+      <HowItWorks onTry={onExplore} />
 
       {/* CTA Section */}
       <section className="py-20 px-4 md:px-6 relative">
