@@ -32,41 +32,43 @@ export default function ComparisonChart({ data }) {
   const colors = ['#00BFFF', '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4'];
 
   return (
-    <ResponsiveContainer width="100%" height={400}>
-      <LineChart
-        data={chartData}
-        margin={{ top: 5, right: 30, left: 0, bottom: 5 }}
-      >
-        <CartesianGrid strokeDasharray="3 3" stroke={isDark ? '#334155' : '#e5e7eb'} />
-        <XAxis
-          dataKey="date"
-          tick={{ fill: isDark ? '#cbd5e1' : '#334155', fontSize: 12 }}
-          interval={Math.floor(chartData.length / 6)}
-        />
-        <YAxis tick={{ fill: isDark ? '#cbd5e1' : '#334155', fontSize: 12 }} tickFormatter={(v) => formatINR(v)} />
-        <Tooltip
-          formatter={(value) => formatINR(value)}
-          contentStyle={{
-            backgroundColor: isDark ? '#0f172a' : '#ffffff',
-            border: `1px solid ${isDark ? '#0891b2' : '#2563eb'}`,
-            borderRadius: '8px',
-          }}
-          labelStyle={{ color: isDark ? '#00BFFF' : '#2563eb' }}
-          itemStyle={{ color: isDark ? '#cbd5e1' : '#111' }}
-        />
-        <Legend wrapperStyle={{ paddingTop: '20px', color: isDark ? '#cbd5e1' : 'var(--text-color)' }} />
-        {data.symbols.map((symbol, idx) => (
-          <Line
-            key={symbol}
-            type="monotone"
-            dataKey={symbol}
-            stroke={colors[idx % colors.length]}
-            dot={false}
-            isAnimationActive={false}
-            strokeWidth={2}
+    <div className="w-full h-64 md:h-96">
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart
+          data={chartData}
+          margin={{ top: 5, right: 30, left: 0, bottom: 5 }}
+        >
+          <CartesianGrid strokeDasharray="3 3" stroke={isDark ? '#334155' : '#e5e7eb'} />
+          <XAxis
+            dataKey="date"
+            tick={{ fill: isDark ? '#cbd5e1' : '#334155', fontSize: 12 }}
+            interval={Math.floor(chartData.length / 6)}
           />
-        ))}
-      </LineChart>
-    </ResponsiveContainer>
+          <YAxis tick={{ fill: isDark ? '#cbd5e1' : '#334155', fontSize: 12 }} tickFormatter={(v) => formatINR(v)} />
+          <Tooltip
+            formatter={(value) => formatINR(value)}
+            contentStyle={{
+              backgroundColor: isDark ? '#0f172a' : '#ffffff',
+              border: `1px solid ${isDark ? '#0891b2' : '#2563eb'}`,
+              borderRadius: '8px',
+            }}
+            labelStyle={{ color: isDark ? '#00BFFF' : '#2563eb' }}
+            itemStyle={{ color: isDark ? '#cbd5e1' : '#111' }}
+          />
+          <Legend wrapperStyle={{ paddingTop: '20px', color: isDark ? '#cbd5e1' : 'var(--text-color)' }} />
+          {data.symbols.map((symbol, idx) => (
+            <Line
+              key={symbol}
+              type="monotone"
+              dataKey={symbol}
+              stroke={colors[idx % colors.length]}
+              dot={false}
+              isAnimationActive={false}
+              strokeWidth={2}
+            />
+          ))}
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
   );
 }

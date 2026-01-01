@@ -103,11 +103,11 @@ function App() {
             <div key={symbol} className="panel backdrop-blur p-4">
               <h2 className="text-xl font-bold text-primary mb-4">📈 {symbol}</h2>
               
-              <div className="flex gap-3 mb-4">
+              <div className="flex flex-col sm:flex-row gap-3 mb-4">
                 <button
                   onClick={() => handlePredict(symbol)}
                   disabled={loading}
-                  className="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 disabled:opacity-50 text-white rounded-lg transition-colors"
+                  className="w-full sm:w-auto px-4 py-3 sm:py-2 bg-cyan-500 hover:bg-cyan-600 disabled:opacity-50 text-white rounded-lg transition-colors text-sm sm:text-base"
                 >
                   {loading ? 'Predicting...' : '🧠 Predict Stock'}
                 </button>
@@ -131,7 +131,7 @@ function App() {
                   {/* Prediction Table removed - revert to download only behavior */}
                   </div>
                   {statsData[symbol] && (
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                       <StatsCard label="Open Price" value={formatINR(statsData[symbol].open_price)} />
                       <StatsCard label="Prev Close" value={formatINR(statsData[symbol].prev_close)} />
                       <StatsCard label="52W High" value={formatINR(statsData[symbol].high_52w)} />

@@ -27,10 +27,10 @@ export default function PredictionTable({ data }) {
 >
   <div className="w-full overflow-x-auto">
     <table
-  className="w-full text-sm md:text-base table-fixed border-collapse"
+  className="w-full min-w-[520px] md:min-w-full text-sm md:text-base table-fixed border-collapse"
   role="table"
   aria-label="Predicted prices table"
->
+> 
   {/* 🔥 THIS IS THE KEY FIX */}
   <colgroup>
     <col className="w-1/2" />
@@ -41,7 +41,7 @@ export default function PredictionTable({ data }) {
     <tr>
       <th
         scope="col"
-        className="sticky top-0 text-left px-3 py-1.5 text-primary font-bold"
+        className="sticky top-0 text-left px-4 py-2 md:px-3 md:py-1.5 text-primary font-bold"
         style={{
           borderBottom: '1px solid var(--panel-border-color)',
           background: 'var(--panel-bg-contrast)',
@@ -52,7 +52,7 @@ export default function PredictionTable({ data }) {
 
       <th
         scope="col"
-        className="sticky top-0 px-3 py-2 text-primary font-bold whitespace-nowrap"
+        className="sticky top-0 px-4 py-2 md:px-3 md:py-2 text-primary font-bold whitespace-nowrap"
         style={{
           borderBottom: '1px solid var(--panel-border-color)',
           background: 'var(--panel-bg-contrast)',
@@ -75,13 +75,13 @@ export default function PredictionTable({ data }) {
               : 'none',
         }}
       >
-        <td className="px-3 py-1.5 text-left text-primary">
+        <td className="px-4 py-2 md:px-3 md:py-1.5 text-left text-primary">
           {r.date}
         </td>
 
-        <td className="px-3 py-2 text-primary">
+        <td className="px-4 py-2 md:px-3 md:py-2 text-primary whitespace-nowrap">
           {formatINR(r.price)}
-        </td>
+        </td> 
       </tr>
     ))}
   </tbody>

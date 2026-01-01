@@ -10,9 +10,9 @@ export default function Header({ onBackHome }) {
         <div className="relative mb-4">
           <div className="flex items-center justify-center gap-3">
             <Activity className="text-cyan-400" size={28} />
-            <h1 className="text-2xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+            <h1 className="text-xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
               Stock Trend Predictor
-            </h1>
+            </h1> 
           </div>
           {onBackHome && (
             <div className="absolute right-0 top-0 flex items-center gap-2">
@@ -34,7 +34,7 @@ export default function Header({ onBackHome }) {
         <p className="text-muted text-center mb-4">
           Live Forecasting Dashboard Powered by LSTM Deep Learning
         </p>
-        <div className="grid grid-cols-3 gap-2 md:gap-3 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 md:gap-3 w-full">
           <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-lg p-4 md:p-5 w-full h-full">
             <p className="text-sm md:text-base text-cyan-300 font-semibold">📅 Fetch Live Data</p>
             <p className="text-sm md:text-base text-muted">From Yahoo Finance</p>

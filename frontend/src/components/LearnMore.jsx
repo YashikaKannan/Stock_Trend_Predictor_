@@ -40,17 +40,17 @@ export default function LearnMore({ onClose, onTry }) {
 
         <p className="text-xs text-muted italic mb-4">For educational purposes only — not financial or investment advice. Use predictions as one input among others and confirm decisions with your own research or a licensed professional.</p>
 
-        <div className="flex gap-3">
+        <div className="flex flex-col sm:flex-row gap-3">
           <button
             onClick={() => { if (onTry) onTry(); }}
-            className="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg font-semibold"
+            className="w-full sm:w-auto px-4 py-3 bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg font-semibold"
           >
             Try Now
           </button>
 
           <button
             onClick={onClose}
-            className="px-4 py-2 border border-slate-200 hover:border-slate-300 rounded-lg text-sm"
+            className="w-full sm:w-auto px-4 py-3 border border-slate-200 hover:border-slate-300 rounded-lg text-sm"
           >
             Close
           </button>

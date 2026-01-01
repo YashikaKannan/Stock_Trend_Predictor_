@@ -66,14 +66,14 @@ export default function LandingPage({ onExplore }) {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
                 onClick={onExplore}
-                className="group relative px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-cyan-500/50 flex items-center justify-center gap-2"
+                className="group relative w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-cyan-500/50 flex items-center justify-center gap-2"
               >
                 Explore Now
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </button>
               <button
                 onClick={() => setLearnOpen(true)}
-                className="px-8 py-4 border border-cyan-500/50 hover:border-cyan-400 text-cyan-300 hover:text-cyan-200 font-semibold rounded-lg transition-all duration-300 backdrop-blur bg-cyan-500/5 hover:bg-cyan-500/10"
+                className="w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 border border-cyan-500/50 hover:border-cyan-400 text-cyan-300 hover:text-cyan-200 font-semibold rounded-lg transition-all duration-300 backdrop-blur bg-cyan-500/5 hover:bg-cyan-500/10"
               >
                 Learn More
               </button>

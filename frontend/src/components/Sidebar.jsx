@@ -28,11 +28,11 @@ export default function Sidebar({
   };
 
   return (
-    <aside className="w-full lg:w-80 panel backdrop-blur p-6 h-fit sticky top-6">
+    <aside className="w-full lg:w-80 panel backdrop-blur p-4 md:p-6 h-fit lg:sticky lg:top-6">
       <h2 className="text-lg font-bold text-cyan-400 mb-4 flex items-center gap-2">
         <Settings size={20} />
         Settings
-      </h2>
+      </h2> 
 
       {/* Stock Symbols */}
       <div className="mb-6">
@@ -44,19 +44,19 @@ export default function Sidebar({
         </p>
         <div className="space-y-2">
           {symbols.map((symbol, idx) => (
-            <div key={idx} className="flex gap-2">
+            <div key={idx} className="flex flex-col sm:flex-row gap-2 items-stretch">
               <input
                 type="text"
                 value={symbol}
                 onChange={(e) => handleSymbolChange(idx, e.target.value)}
                 placeholder="e.g., RELIANCE.NS"
-                className="flex-1 text-sm placeholder-gray-500 focus:outline-none input-panel"
+                className="flex-1 text-sm placeholder-gray-500 focus:outline-none input-panel px-3 py-3 sm:py-2"
                 style={{ background: 'var(--panel-bg)', borderColor: 'var(--panel-border-color)' }}
               />
               {symbols.length > 1 && (
                 <button
                   onClick={() => handleRemoveSymbol(idx)}
-                  className="px-3 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-300 rounded text-sm"
+                  className="h-10 w-10 flex items-center justify-center px-3 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-300 rounded text-sm"
                 >
                   ✕
                 </button>
@@ -66,11 +66,11 @@ export default function Sidebar({
         </div>
         <button
           onClick={handleAddSymbol}
-          className="mt-2 w-full px-3 py-2 btn-ghost text-cyan-400 rounded text-sm transition-colors"
+          className="mt-2 w-full px-4 py-3 btn-ghost text-cyan-400 rounded text-sm md:px-3 md:py-2 transition-colors"
           style={{ borderColor: 'var(--panel-border-color)' }}
         >
           + Add Symbol
-        </button>
+        </button> 
       </div>
 
       {/* Date Range */}
@@ -123,7 +123,7 @@ export default function Sidebar({
       <button
         onClick={onCompare}
         disabled={loading || symbols.some(s => !s)}
-        className="w-full px-4 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-all"
+        className="w-full px-4 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-all text-sm md:text-base"
       >
         {loading ? '⏳ Loading...' : '📊 Compare Stocks'}
       </button>

@@ -12,6 +12,10 @@ import logging
 import io
 from fastapi.staticfiles import StaticFiles
 import os
+from data_sources.yfinance_source import fetch_stock_data
+from data_sources.twelvedata_source import fetch_stock_data_twelve
+
+
 
 
 from model_utils import prepare_data, build_lstm
@@ -72,32 +76,32 @@ class StatsResponse(BaseModel):
 
 
 # ============== Helper Functions ==============
+
 def fetch_stock_data(symbol: str, start_date: str, end_date: str):
-    """Fetch stock data from Yahoo Finance with retry logic"""
     try:
-        # Try to download with timeout and retry
-        data = yf.download(
-            symbol, 
-            start=start_date, 
-            end=end_date, 
-            progress=False,
-            timeout=10
-        )
-        
-        if data.empty:
-            raise ValueError(f"No data found for symbol {symbol}")
-        
-        # Handle single stock returning Series instead of DataFrame
-        if isinstance(data, pd.Series):
-            data = data.to_frame()
-            
+        symbol = symbol.strip().upper()
+        print("FETCHING:", symbol)
+
+        if symbol.endswith(".NS"):
+            print("USING YFINANCE")
+            data = yf.download(
+                symbol,
+                start=start_date,
+                end=end_date,
+                progress=False
+            )
+        else:
+            print("USING TWELVE DATA")
+            data = fetch_stock_data_twelve(symbol, start_date, end_date)
+
+        if data is None or data.empty:
+            raise ValueError(f"No data returned for {symbol}")
+
         return data
+
     except Exception as e:
-        logger.error(f"Error fetching data for {symbol}: {e}")
-        raise HTTPException(
-            status_code=400, 
-            detail=f"Failed to fetch data for {symbol}. Please check the symbol format. {str(e)}"
-        )
+        print("ERROR:", e)
+        raise HTTPException(status_code=400, detail=str(e))
 
 
 def generate_future_dates(last_date, num_days: int):
